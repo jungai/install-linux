@@ -1,0 +1,19 @@
+{
+  "name": "install-linux",
+  "version": "0.2.0",
+  "description": "> required node 15+ & zx",
+  "main": "index.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jungai/install-linux.git"
+  },
+  "author": "jungai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jungai/install-linux/issues"
+  },
+  "homepage": "https://github.com/jungai/install-linux#readme"
+}
