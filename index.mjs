@@ -2,18 +2,18 @@
 
 // path
 const homeDir = await os.homedir()
-const ZSH_CUSTOM = `${homeDir}/.oh-my-zsh/custom`
-const removeDir = [`${ZSH_CUSTOM}/plugins`]
+const zshCustom = `${homeDir}/.oh-my-zsh/custom`
+const removeDir = [`${zshCustom}/plugins`]
 
-function echoStart(msg) {
+function echoStart(msg = '') {
     console.log(chalk.yellow(`🚀 -> install ${msg}`))
 }
 
-function echoNote(msg = "") {
+function echoNote(msg = '') {
     console.log(chalk.yellow(`📌 ${msg}`))
 }
 
-function echoEnd(msg) {
+function echoEnd(msg = '') {
     console.log(chalk.yellow(`🍭 done ${msg}`))
 }
 
@@ -29,13 +29,13 @@ async function beforeAll() {
 }
 
 // TODO: Asdf
-async function setupAsdf(name) {}
+async function setupAsdf(name = 'Asdf') {}
 
 // TODO: Docker
-async function setupDocker(name) {}
+async function setupDocker(name = 'Docker') {}
 
 
-async function setupLinuxBrew(name) {
+async function setupLinuxBrew(name = 'Linux Brew') {
     echoStart(name)
 
     await $`git clone https://github.com/Homebrew/brew ~/.linuxbrew/Homebrew`
@@ -46,7 +46,7 @@ async function setupLinuxBrew(name) {
     echoEnd(name)
 }
 
-async function setupZsh(name) {
+async function setupZsh(name = 'Zsh') {
     echoStart(name)
     await $`sudo apt install -y zsh`
     await $`zsh --version`
@@ -55,10 +55,10 @@ async function setupZsh(name) {
     await $`sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
 
     echoStart('Zsh Syntax')
-    await $`git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM}/plugins/zsh-syntax-highlighting`
+    await $`git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${zshCustom}/plugins/zsh-syntax-highlighting`
 
     echoStart('Zsh AutoSuggestion')
-    await $`git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM}/plugins/zsh-autosuggestions`
+    await $`git clone https://github.com/zsh-users/zsh-autosuggestions ${zshCustom}/plugins/zsh-autosuggestions`
 
     echoNote('set default shell')
     await $`chsh -s $(which zsh)`
@@ -69,10 +69,10 @@ async function setupZsh(name) {
 
 try {
     await beforeAll()
-    await setupZsh('Zsh')
-    await setupLinuxBrew('Linux Brew')
-    await setupAsdf('Asdf')
-    await setupDocker('Docker')
+    await setupZsh()
+    await setupLinuxBrew()
+    await setupAsdf()
+    await setupDocker()
 
 } catch (error) {
     console.log(`Exit code: ${error.exitCode}`)
