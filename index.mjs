@@ -20,8 +20,8 @@ function echoEnd(msg = '') {
 
 async function beforeAll() {
     echoNote('before all')
-    await $`sudo apt update`
-    await $`sudo apt upgrade`
+    await $`sudo apt update -y`
+    await $`sudo apt upgrade -y`
     
     echoNote('clean')
     await Promise.all(removeDir.map(dir => $`rm -rf ${dir}`))
@@ -31,7 +31,7 @@ async function beforeAll() {
 // TODO: Asdf
 async function setupAsdf(name = 'Asdf') {}
 
-// TODO: Docker
+// TODO: Docker (wsl do not install docker)
 async function setupDocker(name = 'Docker') {}
 
 
@@ -61,7 +61,8 @@ async function setupZsh(name = 'Zsh') {
     await $`git clone https://github.com/zsh-users/zsh-autosuggestions ${zshCustom}/plugins/zsh-autosuggestions`
 
     echoNote('set default shell')
-    await $`chsh -s $(which zsh)`
+    // TODO: script break when input value 
+    // await $`chsh -s $(which zsh)`
 
     echoEnd(name)
 }
